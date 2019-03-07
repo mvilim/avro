@@ -31,6 +31,7 @@ namespace avro {
 using std::auto_ptr;
 using std::ostringstream;
 using std::istringstream;
+using std::istream;
 using std::vector;
 using std::copy;
 using std::string;
@@ -194,12 +195,18 @@ void DataFileWriterBase::setMetadata(const string& key, const string& value)
     metadata_[key] = v;
 }
 
-DataFileReaderBase::DataFileReaderBase(const char* filename) :
-    filename_(filename), stream_(fileInputStream(filename)),
+DataFileReaderBase::DataFileReaderBase(auto_ptr<InputStream> is, const char* identifier) :
+    filename_(identifier), stream_(is),
     decoder_(binaryDecoder()), objectCount_(0), eof_(false)
 {
     readHeader();
 }
+
+DataFileReaderBase::DataFileReaderBase(istream& is, const char* identifier) : 
+    DataFileReaderBase::DataFileReaderBase(istreamInputStream(is), identifier) {};
+
+DataFileReaderBase::DataFileReaderBase(const char* filename) : 
+    DataFileReaderBase::DataFileReaderBase(fileInputStream(filename), filename) {};
 
 void DataFileReaderBase::init()
 {

@@ -206,6 +206,16 @@ public:
     void decr() { --objectCount_; }
 
     /**
+     * Constructs the reader for the given input stream.
+     */
+    DataFileReaderBase(std::auto_ptr<InputStream>, const char* filename);
+
+    /**
+     * Constructs the reader for the given istream.
+     */
+    DataFileReaderBase(std::istream& is, const char* filename);
+
+    /**
      * Constructs the reader for the given file and the reader is
      * expected to use the schema that is used with data.
      * This function should be called exactly once after constructing
