@@ -102,6 +102,7 @@ target_link_libraries (avrocpp ${Boost_LIBRARIES})
 
 add_executable (precompile test/precompile.cc)
 
+target_link_libraries (avrocpp_s ${Boost_LIBRARIES})
 target_link_libraries (precompile avrocpp_s ${Boost_LIBRARIES})
 
 macro (gen file ns)
