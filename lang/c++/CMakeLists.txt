@@ -98,7 +98,7 @@ set_target_properties (avrocpp PROPERTIES
 set_target_properties (avrocpp_s PROPERTIES
     VERSION ${AVRO_VERSION_MAJOR}.${AVRO_VERSION_MINOR})
 
-target_link_libraries (avrocpp ${Boost_LIBRARIES})
+target_link_libraries (avrocpp ${Boost_LIBRARIES} z)
 
 add_executable (precompile test/precompile.cc)
 
